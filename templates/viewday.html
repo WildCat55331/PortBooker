@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ day }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" /> -->
+    <style>
+        body {
+            background-color: azure;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <p>List of reservations on {{ day }}</p>
+    <a href="/calander">Back</a>
+    <a href="javascript:history.go(0)">Reload</a>
+    <hr />
+    <div>
+    <p>Reservations:</p>
+    {% for n in eventlist %}
+        <p>{{ n }}</p>
+    {% endfor %}
+    </div>
+    <hr />
+    <div>
+        <p>Room information and amenities:</p>
+        {% for i in roomlist %}
+            <p>{{i}}</p>
+        {% endfor %}
+    </div>
+    <hr />
+
+    <form action="/reservation" method="post">
+        <label for="date">Start date:</label>
+        <input type="text" id="date" name="date" value="{{ day }}" readonly />
+        <br />
+        <label for="start">Start time (24h):</label>
+        <input type="text" id="start" name="start" value="8:00" />
+        <br />
+        <label for="len">Length of reservation (minutes):</label>
+        <input type="number" id="len" name="len" min="30" max="60" value=59 />
+        <br />
+        <label for="isMAST">MAST</label>
+        <input type="checkbox" id="isMAST" name="isMAST" {{ mast }} />
+        <br />
+        <label for="room">Choose a room:</label>
+        <select id="room" name="room">
+            {% for i in rooms %}
+                <option value="{{ loop.index }}">{{ i[1] }}</option>
+            {% endfor %}
+        </select>
+        <br />
+        <label for="notes">Notes:</label>
+        <input type="text" id="notes" name="notes" value="" />
+        <br /><br />
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+
+</html>

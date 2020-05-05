@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ status }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" /> -->
+    <style>
+        body {
+            background-color: azure;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>{{ status }}</h1>
+        <a href="/viewday/{{ day }}">Back</a>
+        <a href="/calander">Home</a>
+        {% if status == "Sucess" %}
+            <p>The reservation was sucessfull.</p>
+        {% elif status == "Fail" %}
+            <p>The reservation was not sucessfull.</p>
+        {% else %}
+            <p>ERROR</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

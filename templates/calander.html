@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>PortBooker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" /> -->
+    <style>
+        body {
+            background-color: azure;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        hr {
+            color: lightslategray;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            grid-gap: 10px;
+            background-color: steelblue;
+            padding: 10px;
+        }
+        .container > div {
+            text-align: center;
+            padding: 20px 0;
+            border: 4px solid #404040;
+        }
+        .dow {
+            background-color: lightgray;
+        }
+        .day {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">PortBooker</h1>
+    <hr />
+
+    <div>
+        <div class="container">
+            {% for n in caltable[0] %}
+            <div class="dow">{{n}}</div>
+            {% endfor %}
+
+            {% for rows in caltable[1:] %}
+                {% for d in rows %}
+                <div class="day"><a href="/viewday/{{d}}">{{d}}</a></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <p>Click on a day to make a reservation on that day.</p>
+    </div>
+    
+    <hr />
+    <div>
+        <p>Room types and amenities:</p>
+        {% for i in roomlist %}
+            <p>{{i}}</p>
+        {% endfor %}
+    </div>
+    <hr />
+</body>
+
+</html>
